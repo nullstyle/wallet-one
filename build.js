@@ -16,4 +16,8 @@ Metalsmith(__dirname)
 	.use($.sass())
   .build(function(err) {
     if (err) throw err;
+
+		if (true) {
+			// TODO: build the system.js bundle
+		}
   });
