@@ -2,4 +2,18 @@
 
 body {
 	margin: 0;
+	padding: 0;
+	position: absolute;
+	height: 100%;
+	width: 100%;
 }
+
+#loading {
+	font-family: Roboto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+	> .msg { max-width: 50%; }
+}
+

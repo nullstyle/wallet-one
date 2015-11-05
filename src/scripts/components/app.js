@@ -1,19 +1,17 @@
 import React from 'react';
-import {AppBar, Tabs, Tab} from 'material-ui';
-import { Router, Route, Link } from 'react-router'
+
+const style = {
+	position: 'absolute',
+	top: 0,
+	left: 0,
+	right: 0,
+	bottom: 0,
+};
 
 export default class App extends React.Component {
   render() {
-    return <div>
-			<AppBar
-				title="Wallet One"
-				onLeftIconButtonTouchTap={this.handleNavOpen} />
-			here
+    return <div style={style}>
 			{this.props.children}
 		</div>;
   }
-
-	handleNavOpen() {
-		console.log("here")
-	}
 }

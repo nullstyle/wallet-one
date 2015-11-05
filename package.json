@@ -33,6 +33,7 @@
       "baseURL": "src"
     },
     "dependencies": {
+      "lodash": "npm:lodash@^3.10.1",
       "material-ui": "npm:material-ui@^0.13.1",
       "react": "npm:react@^0.14.2",
       "react-dom": "npm:react-dom@^0.14.2",
