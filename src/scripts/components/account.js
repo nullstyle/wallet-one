@@ -13,17 +13,11 @@ import MenuDivider from "material-ui/lib/menus/menu-divider";
 import palette from 'scripts/palette';
 import BalanceList from './balance_list';
 import TransactionList from './transaction_list';
-import SendIcon from "material-ui/lib/svg-icons/editor/attach-money"
 import AddIcon from "material-ui/lib/svg-icons/content/add"
+import {SendButton} from 'scripts/components/widgets';
 
 const style = {
 	backgroundColor: palette.main,
-};
-
-const sendStyle = {
-	position: 'absolute',
-	bottom: 24,
-	right: 24,
 };
 
 const addGatewayStyle = {
@@ -32,7 +26,6 @@ const addGatewayStyle = {
 	bottom: 24,
 	left: 24,
 };
-
 
 
 export default class Account extends React.Component {
@@ -69,11 +62,8 @@ export default class Account extends React.Component {
 			</Tabs>
 			{this.props.children}
 
-			<FloatingActionButton 
-				style={sendStyle}
-				onTouchTap={() => this.refs.sendForm.show()}>
-				<SendIcon />
-			</FloatingActionButton>
+
+			<SendButton onClick={() => this.refs.sendForm.show()} />
 
 			<FloatingActionButton 
 				style={addGatewayStyle} 
@@ -108,7 +98,6 @@ export default class Account extends React.Component {
 	}
 
 	switchAccount(accountId) {
-		console.log("here")
 		window.location.hash = `/accounts/${accountId}/`;
 		this.refs.nav.close();
 	}
