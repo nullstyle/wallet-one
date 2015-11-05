@@ -2,3 +2,4 @@
 /src/jspm_packages
 /build
 npm-debug.log
+.DS_Store
