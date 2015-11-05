@@ -6,7 +6,12 @@
 		<script src="jspm_packages/system.js"></script>
     <script src="config.js"></script>
     <script>
-        System.import('./scripts/main');
+			<% if (config.bundle) { %>	
+			System.config({
+				bundles: { 'bundle': ['scripts/main.js'] }
+			});
+			<% } %>
+      System.import('scripts/main.js');
     </script>
   </head>
   <body>
