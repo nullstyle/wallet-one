@@ -1,8 +1,15 @@
 import React from 'react';
 import {
-	AppBar, Tabs, Tab, FloatingActionButton, LeftNav, MenuItem, Dialog,
-	TextField, SelectField,
+	AppBar, Tabs, Tab, FloatingActionButton, LeftNav, Dialog,
+	TextField, SelectField, 
 } from 'material-ui';
+
+import {
+	MenuItem, SubheaderMenuItem, LinkMenuItem, Menu
+} from "material-ui/lib/menu";
+
+import MenuDivider from "material-ui/lib/menus/menu-divider";
+
 import palette from 'scripts/palette';
 import BalanceList from './balance_list';
 import TransactionList from './transaction_list';
@@ -75,8 +82,14 @@ export default class Account extends React.Component {
 			</FloatingActionButton>
 
 			<LeftNav ref="nav" docked={false}>
-				<MenuItem index={0}>Menu Item</MenuItem>
-				<MenuItem index={1}><a href="/link">Link</a></MenuItem>
+				<Menu 
+					onItemTap={(e,i,m) => this.switchAccount(m.id)}
+					menuItems={[
+						{ text: 'Accounts',  type: MenuItem.Types.SUBHEADER},
+						{ text: 'Account 1', id: "1"},
+						{ text: 'Account 2', id: "2"},
+						]}
+					/>
 			</LeftNav>
 
 			<Dialog title="Send Money" ref="sendForm" actions={sendFormActions}>
@@ -92,5 +105,11 @@ export default class Account extends React.Component {
 
 	handleNavOpen() {
 		this.refs.nav.toggle();
+	}
+
+	switchAccount(accountId) {
+		console.log("here")
+		window.location.hash = `/accounts/${accountId}/`;
+		this.refs.nav.close();
 	}
 }
