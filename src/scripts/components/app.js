@@ -1,4 +1,10 @@
 import React from 'react';
+import { Router, Route, Link, IndexRoute } from 'react-router';
+
+
+import Settings from './settings';
+import Account from './account';
+import Unlock from './unlock';
 
 const style = {
 	position: 'absolute',
@@ -11,7 +17,13 @@ const style = {
 export default class App extends React.Component {
   render() {
     return <div style={style}>
-			{this.props.children}
+      <Router>
+        <Route path="/" component={Unlock} />
+        <Route path="/home" component={Account}>
+          
+        </Route>
+        <Route path="/settings" component={Settings} />
+      </Router>
 		</div>;
   }
 }

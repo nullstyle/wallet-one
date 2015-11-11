@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
 	AppBar, Tabs, Tab, FloatingActionButton, LeftNav, Dialog,
 	TextField, SelectField, 
@@ -28,14 +29,15 @@ const addGatewayStyle = {
 };
 
 
-export default class Account extends React.Component {
+class Account extends React.Component {
 
-	constructor(props) {
-    super(props);
-    this.state = {asset: null};
-  }
+  componentWillReceiveProps(nextProps) {
+    this.dispatch = nextProps.dispatch;
+  }  
 
   render() {
+    let {address} = this.props;
+
 		let sendFormAssets = [
 			{payload: 0, text: 'XLM'},
 			{payload: 1, text: 'USD/GCDSRTDSFRSD...'},
@@ -49,7 +51,7 @@ export default class Account extends React.Component {
 
     return <div>
 			<AppBar
-				title={this.props.params.accountId}
+				title={address}
 				style={style}
 				onLeftIconButtonTouchTap={() => this.handleNavOpen()} />
 			<Tabs tabItemContainerStyle={style}>
@@ -86,7 +88,7 @@ export default class Account extends React.Component {
 				<TextField hintText="Recipient" />
 				<TextField hintText="Amount" />
 				<SelectField
-					value={this.state.asset}
+					value={null}
 					hintText="Asset"
 					menuItems={sendFormAssets} />
 			</Dialog>
@@ -102,3 +104,9 @@ export default class Account extends React.Component {
 		this.refs.nav.close();
 	}
 }
+
+function select(state) {
+  return state.currentAccount;
+}
+
+export default connect(select)(Account);

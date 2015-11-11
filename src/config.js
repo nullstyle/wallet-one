@@ -15,13 +15,16 @@ System.config({
   map: {
     "babel": "npm:babel-core@5.8.33",
     "babel-runtime": "npm:babel-runtime@5.8.29",
-    "core-js": "npm:core-js@1.2.5",
+    "core-js": "npm:core-js@1.2.6",
     "lodash": "npm:lodash@3.10.1",
     "material-ui": "npm:material-ui@0.13.1",
     "react": "npm:react@0.14.2",
     "react-dom": "npm:react-dom@0.14.2",
+    "react-redux": "npm:react-redux@4.0.0",
     "react-router": "npm:react-router@1.0.0-rc4",
     "react-tap-event-plugin": "npm:react-tap-event-plugin@0.2.1",
+    "redux": "npm:redux@3.0.4",
+    "redux-thunk": "npm:redux-thunk@1.0.0",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -67,7 +70,7 @@ System.config({
       "ieee754": "npm:ieee754@1.1.6",
       "is-array": "npm:is-array@1.0.1"
     },
-    "npm:core-js@1.2.5": {
+    "npm:core-js@1.2.6": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -89,13 +92,13 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:fbjs@0.2.1": {
-      "core-js": "npm:core-js@1.2.5",
+      "core-js": "npm:core-js@1.2.6",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "promise": "npm:promise@7.0.4",
       "whatwg-fetch": "npm:whatwg-fetch@0.9.0"
     },
     "npm:fbjs@0.3.2": {
-      "core-js": "npm:core-js@1.2.5",
+      "core-js": "npm:core-js@1.2.6",
       "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "promise": "npm:promise@7.0.4",
@@ -171,6 +174,13 @@ System.config({
     "npm:react-dom@0.14.2": {
       "react": "npm:react@0.14.2"
     },
+    "npm:react-redux@4.0.0": {
+      "hoist-non-react-statics": "npm:hoist-non-react-statics@1.0.3",
+      "invariant": "npm:invariant@2.1.2",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "react": "npm:react@0.14.2",
+      "redux": "npm:redux@3.0.4"
+    },
     "npm:react-router@1.0.0-rc4": {
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
@@ -197,6 +207,9 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "stream-browserify": "npm:stream-browserify@1.0.0",
       "string_decoder": "npm:string_decoder@0.10.31"
+    },
+    "npm:redux@3.0.4": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:source-map@0.1.31": {
       "amdefine": "npm:amdefine@1.0.0",

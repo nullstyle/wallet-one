@@ -11,6 +11,20 @@
 				bundles: { 'bundle': ['scripts/main.js'] }
 			});
 			<% } %>
+
+      System.config({
+        bundles: {'vendor.bundle': [
+          "react",
+          "react-dom",
+          "react-router",
+          "react-tap-event-plugin",
+          "redux",
+          "react-redux",
+          "lodash",
+          "material-ui",
+        ]}
+      }) 
+
       System.import('scripts/main.js');
     </script>
   </head>

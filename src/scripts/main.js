@@ -1,27 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Link, IndexRoute } from 'react-router'
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
+
+import walletOneApp from './reducers/index.js';
 
 import App from './components/app';
-import Settings from './components/settings';
-import Account from './components/account';
-import NoMatch from './components/no-match';
-import Unlock from './components/unlock';
-import Home from './components/home';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
+var loadedState = undefined;
+var store = createStore(walletOneApp, loadedState);
+
+console.log(store.getState());
+
 ReactDOM.render(
-  <Router>
-    <Route path="/" component={App}>
-			<IndexRoute component={Unlock}/>
-      <Route path="accounts/:accountId/" component={Account}>
-				<Route path="home" component={Home}/>
-				<Route path="settings" component={Settings}/>
-			</Route>
-    </Route>
-  </Router>,	
+  <Provider store={store}>
+    <App />  
+  </Provider>,	
   document.getElementById('app')
 );
 
