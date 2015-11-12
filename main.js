@@ -8,6 +8,20 @@ require('crash-reporter').start();
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
 
+var shouldQuit = app.makeSingleInstance(() => {
+  // Someone tried to run a second instance, we should focus our window
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) mainWindow.restore();
+    mainWindow.focus();
+  }
+  return true;
+});
+
+if (shouldQuit) {
+  app.quit();
+  return;
+}
+
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
   // On OS X it is common for applications and their menu bar
