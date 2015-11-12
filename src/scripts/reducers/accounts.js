@@ -3,20 +3,15 @@ import {LOAD_ACCOUNT, LOAD_STATE, NEW_ACCOUNT} from "scripts/actions/index";
 
 const noAccount = "";
 
-const initialState = {
-  current: noAccount,
-  byAddress: { },
-  loaded: false,
-};
-
 const accounts = combineReducers({
   byAddress,
   current,
+  loaded,
 });
 
 export default accounts;
 
-function byAddress(state = initialState.byAddress, action) {
+function byAddress(state = {}, action) {
   switch(action.type) {
     case LOAD_STATE:
       return action.wallet.byAddress || state;
@@ -32,7 +27,7 @@ function byAddress(state = initialState.byAddress, action) {
   }
 }
 
-function current(state = initialState.current, action) {
+function current(state = noAccount, action) {
   switch(action.type) {
     case LOAD_STATE:
       if (state) return state;
@@ -50,7 +45,7 @@ function current(state = initialState.current, action) {
   }
 }
 
-function loaded(state = initialState.loaded, action) {
+function loaded(state = false, action) {
    switch(action.type) {
     case LOAD_STATE:
       return true

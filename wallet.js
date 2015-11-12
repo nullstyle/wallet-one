@@ -11,7 +11,7 @@ const defaultWallet = {
 exports.save = function(state) {
   if (!state) state = defaultWallet;
 
-  fs.writeFileSync(walletPath, JSON.stringify(state));
+  fs.writeFileSync(walletPath, JSON.stringify(state, null, '  '));
 };
 
 exports.load = function() {

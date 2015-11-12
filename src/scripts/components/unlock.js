@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {RaisedButton} from "material-ui";
 import {SplashScreen} from "./widgets";
 import palette from "scripts/palette";
-import {loadState, newRandomAccount} from "scripts/actions/index";
+import {navigateHome, newRandomAccount} from "scripts/actions/index";
 
 
 class Unlock extends React.Component {
@@ -16,8 +16,8 @@ class Unlock extends React.Component {
 			<RaisedButton 
 				label="Unlock" 
 				primary={true} 
-				onMouseUp={() => dispatch(loadState())}
-				onTouchEnd={() => dispatch(loadState())}
+				onMouseUp={() => dispatch(navigateHome())}
+				onTouchEnd={() => dispatch(navigateHome())}
 				/>		
 			<RaisedButton 
 				label="Create Account" 
