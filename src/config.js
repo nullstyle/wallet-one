@@ -16,6 +16,7 @@ System.config({
     "babel": "npm:babel-core@5.8.33",
     "babel-runtime": "npm:babel-runtime@5.8.29",
     "core-js": "npm:core-js@1.2.6",
+    "deep-diff": "npm:deep-diff@0.3.3",
     "lodash": "npm:lodash@3.10.1",
     "material-ui": "npm:material-ui@0.13.1",
     "react": "npm:react@0.14.2",
@@ -25,6 +26,7 @@ System.config({
     "react-tap-event-plugin": "npm:react-tap-event-plugin@0.2.1",
     "redux": "npm:redux@3.0.4",
     "redux-thunk": "npm:redux-thunk@1.0.0",
+    "stellar-sdk": "github:stellar/bower-js-stellar-sdk@0.2.20",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },

@@ -4,17 +4,10 @@ import { connect } from 'react-redux';
 import {RaisedButton} from "material-ui";
 import {SplashScreen} from "./widgets";
 import palette from "scripts/palette";
-import {loadAccount} from "scripts/actions/index";
+import {loadState, newRandomAccount} from "scripts/actions/index";
 
-const unlockButtonStyles = {
-
-}
 
 class Unlock extends React.Component {
-
-	componentWillMount() {
-
-  }
 
   render() {
     const { dispatch } = this.props 
@@ -23,17 +16,17 @@ class Unlock extends React.Component {
 			<RaisedButton 
 				label="Unlock" 
 				primary={true} 
-				style={unlockButtonStyles}
-				onMouseUp={() => this.handleUnlock(dispatch)}
-				onTouchEnd={() => this.handleUnlock(dispatch)}
+				onMouseUp={() => dispatch(loadState())}
+				onTouchEnd={() => dispatch(loadState())}
 				/>		
+			<RaisedButton 
+				label="Create Account" 
+				primary={true} 
+				onMouseUp={() => dispatch(newRandomAccount())}
+				onTouchEnd={() => dispatch(newRandomAccount())}
+				/>	
 		</SplashScreen>;
   }
-
-	handleUnlock(dispatch) {
-    dispatch(loadAccount("GBS43BF24ENNS3KPACUZVKK2VYPOZVBQO2CISGZ777RYGOPYC2FT6S3K"));
-    window.location.hash = "/home"
-	}
 }
 
 function select(state) {
