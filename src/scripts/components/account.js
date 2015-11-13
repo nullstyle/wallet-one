@@ -1,23 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {each, findIndex} from 'lodash';
 import {
-  AppBar, Tabs, Tab, FloatingActionButton, LeftNav, Dialog,
-  TextField, SelectField, 
+  AppBar, Tabs, Tab, FloatingActionButton, 
 } from 'material-ui';
 
-import {
-  MenuItem, SubheaderMenuItem, LinkMenuItem, Menu
-} from "material-ui/lib/menu";
-
-import MenuDivider from "material-ui/lib/menus/menu-divider";
 
 import palette from 'scripts/palette';
 import BalanceList from './balance-list';
 import TransactionList from './transaction-list';
 import AccountMenu from './account-menu';
+import SendForm from './send-form';
 import AddIcon from "material-ui/lib/svg-icons/content/add"
-import {SendButton} from 'scripts/components/widgets';
 import {loadAccount} from 'scripts/actions/index'
 
 const style = {
@@ -37,16 +30,6 @@ class Account extends React.Component {
   render() {
     let {accounts, dispatch} = this.props;
 
-    let sendFormAssets = [
-      {payload: 0, text: 'XLM'},
-      {payload: 1, text: 'USD/GCDSRTDSFRSD...'},
-      {payload: 1, text: 'JPY/onecred.org'},
-    ]
-
-    let sendFormActions = [
-      { text: 'Cancel' },
-      { text: 'Submit', onTouchTap: () => {console.log("beep")} }
-    ]
 
     return <div>
       <AppBar
@@ -66,7 +49,6 @@ class Account extends React.Component {
       {this.props.children}
 
 
-      <SendButton onClick={() => this.refs.sendForm.show()} />
 
       <FloatingActionButton 
         style={addGatewayStyle} 
@@ -79,15 +61,8 @@ class Account extends React.Component {
         onSelect={m => dispatch(loadAccount(m))}
         />
 
+      <SendForm />
 
-      <Dialog title="Send Money" ref="sendForm" actions={sendFormActions}>
-        <TextField hintText="Recipient" />
-        <TextField hintText="Amount" />
-        <SelectField
-          value={null}
-          hintText="Asset"
-          menuItems={sendFormAssets} />
-      </Dialog>
     </div>;
   }
 
