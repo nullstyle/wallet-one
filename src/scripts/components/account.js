@@ -13,8 +13,8 @@ import {
 import MenuDivider from "material-ui/lib/menus/menu-divider";
 
 import palette from 'scripts/palette';
-import BalanceList from './balance_list';
-import TransactionList from './transaction_list';
+import BalanceList from './balance-list';
+import TransactionList from './transaction-list';
 import AccountMenu from './account-menu';
 import AddIcon from "material-ui/lib/svg-icons/content/add"
 import {SendButton} from 'scripts/components/widgets';
