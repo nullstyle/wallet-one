@@ -15,6 +15,7 @@ import MenuDivider from "material-ui/lib/menus/menu-divider";
 import palette from 'scripts/palette';
 import BalanceList from './balance_list';
 import TransactionList from './transaction_list';
+import AccountMenu from './account-menu';
 import AddIcon from "material-ui/lib/svg-icons/content/add"
 import {SendButton} from 'scripts/components/widgets';
 import {loadAccount} from 'scripts/actions/index'
@@ -34,8 +35,7 @@ const addGatewayStyle = {
 class Account extends React.Component {
 
   render() {
-    let dispatch = this.props.dispatch;
-    let {accounts} = this.props;
+    let {accounts, dispatch} = this.props;
 
     let sendFormAssets = [
       {payload: 0, text: 'XLM'},
@@ -48,20 +48,12 @@ class Account extends React.Component {
       { text: 'Submit', onTouchTap: () => {console.log("beep")} }
     ]
 
-    let menuItems = [{ text: 'Accounts',  type: MenuItem.Types.SUBHEADER}];
-
-    each(accounts.byAddress, (account) => {
-      let {address, seed} = account;
-      menuItems.push({text: address, address, seed})
-    });
-
-    let selectedIndex = findIndex(menuItems, {address: accounts.current});
-
     return <div>
       <AppBar
         title={accounts.current}
         style={style}
         onLeftIconButtonTouchTap={() => this.handleNavOpen()} />
+
       <Tabs tabItemContainerStyle={style}>
         <Tab label="Balances">
           <BalanceList />
@@ -70,6 +62,7 @@ class Account extends React.Component {
           <TransactionList />
         </Tab>
       </Tabs>
+
       {this.props.children}
 
 
@@ -81,14 +74,11 @@ class Account extends React.Component {
         <AddIcon />
       </FloatingActionButton>
 
+      <AccountMenu ref={m => this._menu = m}
+        accounts={accounts}
+        onSelect={m => dispatch(loadAccount(m))}
+        />
 
-      <LeftNav ref="nav" docked={false}>
-        <Menu 
-          onItemTap={(e,i,m) => dispatch(loadAccount(m))}
-          menuItems={menuItems}
-          selectedIndex={selectedIndex}
-          />
-      </LeftNav>
 
       <Dialog title="Send Money" ref="sendForm" actions={sendFormActions}>
         <TextField hintText="Recipient" />
@@ -102,7 +92,7 @@ class Account extends React.Component {
   }
 
   handleNavOpen() {
-    this.refs.nav.toggle();
+    this._menu.toggle();
   }
 
 }
