@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 import accounts from "./accounts";
+import summaries from "./summaries";
 
 // const initialState = {
 
@@ -29,6 +30,7 @@ import accounts from "./accounts";
 
 const walletOneApp = combineReducers({
   accounts,
+  summaries,
 })
 
 export default walletOneApp;

@@ -1,8 +1,16 @@
 import "stellar-sdk";
+
 let {Keypair} = StellarSdk.StellarBase;
 
 let remote = require("remote");
 let wallet = remote.require("./wallet");
+
+const server = new StellarSdk.Server({
+  hostname:'horizon-testnet.stellar.org', 
+  secure: true, 
+  port: 443
+});
+
 
 export const LOAD_ACCOUNT = 'LOAD_ACCOUNT';
 export function loadAccount({address, seed}) {
@@ -11,6 +19,26 @@ export function loadAccount({address, seed}) {
     type: LOAD_ACCOUNT,
     address,
     seed,
+  }
+}
+
+export const LOAD_ACCOUNT_SUMMARY = 'LOAD_ACCOUNT_SUMMARY';
+export function loadAccountSummary({address}) {
+  let action = {
+    type: LOAD_ACCOUNT_SUMMARY,
+    address
+  }
+
+  return dispatch => {
+    server.accounts().address(address).call()
+      .then(s => {
+        action.summary = s;
+        dispatch(action);
+      })
+      .catch(StellarSdk.NotFoundError, e => {
+        action.summary = { isUnfunded: true };
+        dispatch(action);
+      })
   }
 }
 

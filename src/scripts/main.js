@@ -4,6 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
+import { defer } from 'lodash';
 
 import walletOneApp from './reducers/index';
 import {loadState} from './actions/index';
@@ -18,13 +19,15 @@ injectTapEventPlugin();
 let createStoreWithMiddleware = applyMiddleware(thunk, wallet, logger)(createStore)
 var store = createStoreWithMiddleware(walletOneApp);
 
-store.dispatch(loadState());
 
+defer(() => {
+  store.dispatch(loadState());
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />  
-  </Provider>,	
-  document.getElementById('app')
-);
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />  
+    </Provider>,	
+    document.getElementById('app')
+  );
+});
 

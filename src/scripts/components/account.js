@@ -11,7 +11,7 @@ import TransactionList from './transaction-list';
 import AccountMenu from './account-menu';
 import SendForm from './send-form';
 import AddIcon from "material-ui/lib/svg-icons/content/add"
-import {loadAccount} from 'scripts/actions/index'
+import {loadAccount, loadAccountSummary} from 'scripts/actions/index'
 
 const style = {
   backgroundColor: palette.main,
@@ -28,8 +28,13 @@ const addGatewayStyle = {
 class Account extends React.Component {
 
   render() {
-    let {accounts, dispatch} = this.props;
-
+    let {accounts, dispatch, summaries} = this.props;
+    let summary = summaries.byAddress[accounts.current];
+    
+    if (!summary) {
+      dispatch(loadAccountSummary({address: accounts.current}));
+      //TODO: return loading
+    }
 
     return <div>
       <AppBar
@@ -47,8 +52,6 @@ class Account extends React.Component {
       </Tabs>
 
       {this.props.children}
-
-
 
       <FloatingActionButton 
         style={addGatewayStyle} 
