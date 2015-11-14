@@ -12,6 +12,7 @@ import {
   TransactionList,
   AccountMenu,
   SendForm,
+  Loading,
 } from "scripts/components";
 
 import {loadAccount, loadAccountSummary} from 'scripts/actions/index'
@@ -36,7 +37,7 @@ class Home extends React.Component {
     
     if (!summary) {
       dispatch(loadAccountSummary({address: accounts.current}));
-      //TODO: return loading
+      return <Loading />
     }
 
     return <div>
@@ -47,7 +48,7 @@ class Home extends React.Component {
 
       <Tabs tabItemContainerStyle={style}>
         <Tab label="Balances">
-          <BalanceList />
+          <BalanceList summary={summary} />
         </Tab>
         <Tab label="Transactions">
           <TransactionList />

@@ -5,3 +5,4 @@ import SendForm from 'scripts/components/send-form';
 
 export { BalanceList, TransactionList, AccountMenu, SendForm };
 
+export * from 'scripts/components/widgets';

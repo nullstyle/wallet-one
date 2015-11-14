@@ -3,14 +3,16 @@ import {extend} from 'lodash'
 import {FloatingActionButton} from 'material-ui';
 import SendIcon from "material-ui/lib/svg-icons/editor/attach-money";
 
+// Loading is a loading screen
+export function Loading(props) {
+	return <div>Loading...</div>
+}
+
 // SplashScreen filles it's parent
 
 export function SplashScreen(props) {
 	let styles = extend(splashStyles, {
 		background: props.color,
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
 	})
 	return <div style={styles}>{props.children}</div>
 }
@@ -20,6 +22,9 @@ const splashStyles = {
 	height: '100%',
 	margin: '0',
 	padding: '0',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 }
 
 // SendButton provides a floating action button with a dollar sign icon
