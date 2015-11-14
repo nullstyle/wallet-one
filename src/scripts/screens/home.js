@@ -3,14 +3,17 @@ import { connect } from 'react-redux';
 import {
   AppBar, Tabs, Tab, FloatingActionButton, 
 } from 'material-ui';
+import AddIcon from "material-ui/lib/svg-icons/content/add"
 
 
 import palette from 'scripts/palette';
-import BalanceList from './balance-list';
-import TransactionList from './transaction-list';
-import AccountMenu from './account-menu';
-import SendForm from './send-form';
-import AddIcon from "material-ui/lib/svg-icons/content/add"
+import {
+  BalanceList,
+  TransactionList,
+  AccountMenu,
+  SendForm,
+} from "scripts/components";
+
 import {loadAccount, loadAccountSummary} from 'scripts/actions/index'
 
 const style = {
@@ -25,7 +28,7 @@ const addGatewayStyle = {
 };
 
 
-class Account extends React.Component {
+class Home extends React.Component {
 
   render() {
     let {accounts, dispatch, summaries} = this.props;
@@ -79,4 +82,4 @@ function select(state) {
   return state; 
 }
 
-export default connect(select)(Account);
+export default connect(select)(Home);

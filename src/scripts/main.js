@@ -11,7 +11,7 @@ import {loadState} from './actions/index';
 import wallet from "./middleware/wallet";
 import logger from "./middleware/logger";
 
-import App from './components/app';
+import UI from './ui.js';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -25,7 +25,7 @@ defer(() => {
 
   ReactDOM.render(
     <Provider store={store}>
-      <App />  
+      <UI />  
     </Provider>,	
     document.getElementById('app')
   );

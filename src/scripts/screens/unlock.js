@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import {RaisedButton} from "material-ui";
-import {SplashScreen} from "./widgets";
+import {SplashScreen} from "scripts/components/widgets";
 import palette from "scripts/palette";
 import {navigateHome, newRandomAccount} from "scripts/actions/index";
 
