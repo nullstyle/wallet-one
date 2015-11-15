@@ -72,9 +72,9 @@ export function tests(t) {
     }, it => {
       it("replaces the state", (state, action) => {
         expect(state).to.equal(action.wallet.byAddress);
-      })
-    })
-  })
+      });
+    });
+  });
 
   describe(loaded, context => {
     // for reducer tests, context takes both a
