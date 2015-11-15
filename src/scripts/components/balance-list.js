@@ -23,12 +23,13 @@ const nativeSym = "0";
 export default class BalanceList extends React.Component {
   render() {
     if (this.props.summary.isUnfunded) return (<div />);
+
     let data = balancesByGateway(this.props.summary);
-    console.log(data);
     let lines = map(data.sorted, (gateway, id) => {
       let assets = data.byGateway[gateway];
       return <Gateway key={id} gateway={gateway} assets={assets} />;
     });
+
     return <div>{lines}</div>;
   }
 }

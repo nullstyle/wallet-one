@@ -1,6 +1,6 @@
 import {combineReducers} from "redux";
 import {LOAD_ACCOUNT, LOAD_STATE, NEW_ACCOUNT} from "scripts/actions/index";
-import {addTests} from "test";
+import {addTests} from "scripts/test";
 
 const noAccount = "";
 
@@ -59,6 +59,22 @@ function loaded(state = false, action) {
 export function tests(t) {
   let {expect} = t;
   let {describe} = t.reducer;
+
+  describe(byAddress, context => {
+    context({
+      state: {},
+      action: {
+        type: LOAD_STATE,
+        wallet: {
+          byAddress: {"123": 3}
+        }
+      }
+    }, it => {
+      it("replaces the state", (state, action) => {
+        expect(state).to.equal(action.wallet.byAddress);
+      })
+    })
+  })
 
   describe(loaded, context => {
     // for reducer tests, context takes both a

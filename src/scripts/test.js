@@ -60,8 +60,8 @@ export function runReducers() {
   eachCase(reducer.cases, kase => {
     try {
       let reducer   = kase.subject;
-      let state     = makeGenerator(kase.context.state).generate();
-      let action    = makeGenerator(kase.context.action).generate();
+      let state     = generate(kase.context.state);
+      let action    = generate(kase.context.action);
       let nextState = reducer(state, action);
 
       kase.fn(nextState, action, state);
