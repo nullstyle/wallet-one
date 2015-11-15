@@ -1,5 +1,6 @@
 import {combineReducers} from "redux";
 import {LOAD_ACCOUNT, LOAD_STATE, NEW_ACCOUNT} from "scripts/actions/index";
+import {addTests} from "test";
 
 const noAccount = "";
 
@@ -78,3 +79,4 @@ export function tests(t) {
     });
   });
 }
+addTests(tests);

@@ -7,6 +7,7 @@ import {
   without,
   map,
 } from 'lodash';
+import {addTests} from "test";
 
 const style = {
 };
@@ -61,6 +62,11 @@ function balancesByGateway(summary) {
   }, {});
 
   let keys = Object.keys(byGateway);
+
+  if (keys.length === 0) {
+    return {};
+  }
+
   let sorted = sortBy(keys);
   sorted = [nativeSym].concat(without(sorted, nativeSym));
 
@@ -83,8 +89,27 @@ export function tests(t) {
     context("unfunded account summary", it => {
       let summary = {isUnfunded: true};
       it("returns an empty map", subject => {
-        expect(subject(summary)).to.equal({});
+        expect(subject(summary)).to.deep.equal({});
       });
+    });
+
+    context("only native balance", it => {
+      let summary = {balances: [{
+        asset_code: "native",
+        amount: "100.00",
+      }]};
+
+      it("indexes the balance at 0", subject => {
+        let {byGateway} = subject(summary);
+        expect(byGateway).to.be.an('object');
+        expect(byGateway['0'][0]).to.equal(summary.balances[0]);
+      });
+
+      it("sets a sorted value", subject => {
+        let {sorted} = subject(summary);
+        expect(sorted).to.have.length(1);
+        expect(sorted[0]).to.equal('0');
+      })
     });
   });
 
@@ -136,3 +161,4 @@ export function tests(t) {
 
   });
 }
+addTests(tests);

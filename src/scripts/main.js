@@ -14,21 +14,9 @@ import logger from "./middleware/logger";
 import UI from './ui.js';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import test, {runUnits} from 'test';
+import test, * as t2 from 'test';
 global.test = test;
-global.runUnits = runUnits;
-console.log(test);
-
-let {expect} = test;
-test.unit.describe("x", c => {
-  c("y", i => {
-    i("z", () => {
-      expect(3).to.equal(4);
-      expect(3).to.equal(3);
-      expect(3).to.equal(5);
-    })
-  })
-})
+test.fn = t2;
 
 injectTapEventPlugin();
 
