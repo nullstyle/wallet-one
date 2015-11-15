@@ -1,5 +1,8 @@
-import {each} from "lodash";
+import {each, reduce, any, isFunction} from "lodash";
 import {expect} from "chai";
+import generate, * as generators from './test/generators';
+import match, * as matchers from './test/matchers';
+
 
 let testFns = [];
 
@@ -11,17 +14,18 @@ const reducer =  newType();
 const actionCreator = {describe:none};
 // const actionCreator =  newType();
 
-const match = {
-  any: none,
-  string: none,
-  or: none,
-  falsey: none,
+
+const contracts = {
+  falsey: newContract('falsey'),
+  or:     newContract('or', {dynamic: true}),
 }
+
 const x = {
   stellar: {
     amount: none,
   },
 };
+
 
 export function addTests(testFn) {
   testFns.push(testFn);
@@ -71,7 +75,11 @@ export function runReducers() {
   return {failures, successes};
 }
 
-const t = {unit, component, reducer, actionCreator, expect, match, x};
+
+const t = {
+  actionCreator, component, contracts, expect, generate, match, reducer, unit,
+  x,
+};
 export default t;
 
 function eachCase(describes, runCaseFn) {
@@ -88,6 +96,7 @@ function eachCase(describes, runCaseFn) {
     });
   });
 }
+
 function newType()  {
   let cases = [];
 
@@ -105,7 +114,19 @@ function newType()  {
   return {cases, describe};
 }
 
-function makeGenerator(spec) {
-  let generate = seed => spec;
-  return {generate};
+function newContract(key, options={}) {
+  let {dynamic} = options;
+  let generate  = generators[key];
+  let match     = matchers[key];
+
+  if (dynamic) {
+    return (...args) => {
+      return {
+        $generate: generate(...args),
+        $match:    match(...args),
+      }
+    }
+  } else {
+    return {generate, match};
+  }
 }
