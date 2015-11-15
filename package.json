@@ -40,6 +40,7 @@
       "baseURL": "src"
     },
     "dependencies": {
+      "chai": "npm:chai@^3.4.1",
       "deep-diff": "npm:deep-diff@^0.3.3",
       "lodash": "npm:lodash@^3.10.1",
       "material-ui": "npm:material-ui@^0.13.1",

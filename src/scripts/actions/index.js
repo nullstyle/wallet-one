@@ -6,8 +6,8 @@ let remote = require("remote");
 let wallet = remote.require("./wallet");
 
 const server = new StellarSdk.Server({
-  hostname:'horizon-testnet.stellar.org', 
-  secure: true, 
+  hostname:'horizon-testnet.stellar.org',
+  secure: true,
   port: 443
 });
 
@@ -86,4 +86,37 @@ export function walletChanged(newWallet) {
   return {
     type: WALLET_CHANGED,
   };
+}
+
+export function tests(t) {
+  let {describe} = t.actionCreator;
+  let {keypair} = t.x.match;
+
+  // Action creator tests ensure that our actions
+  // are always in specified states.  when run by
+  // a triggered test, the context matcher is used
+  // to generate actions, which are then tested against
+  // each it block.
+  //
+  // in debug mode, actions that are dispatched that
+  // match a context will get tested against each it
+  // block as well.
+  //
+  // several middleware also pertain to action tests.
+  // the trace middleware builds a frequency list of
+  // context matches that can be used to feed into the
+  // probability of running actionCreator tests in debug
+  // mode.  The testing middleware actually runs the it
+  // blocks and can accept a weighting function.
+  describe(ac, context => {
+    context({
+      keypair: keypair.full(),
+    }, it => {
+      it("has a full keypair", action => {
+
+      });
+    });
+  });
+
+
 }

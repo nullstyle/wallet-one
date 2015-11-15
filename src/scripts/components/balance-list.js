@@ -43,10 +43,10 @@ let Gateway = (props) => {
 }
 
 let Asset = (props) => {
-  let {code, balance, asset_type} = props.asset;
-  if (asset_type === "native") code = "XLM";
+  let {asset_code, balance, asset_type} = props.asset;
+  if (asset_type === "native") asset_code = "XLM";
 
-	return <ListItem primaryText={code} >
+	return <ListItem primaryText={asset_code} >
 		<div style={balanceAmountStyle}>{balance}</div>
 	</ListItem>;
 }
@@ -66,4 +66,73 @@ function balancesByGateway(summary) {
 
 
   return {byGateway, sorted};
+}
+
+export function tests(t) {
+
+  let {expect} = t;
+
+  // unit tests are just like normal mocha tests
+  // and do not plug into the application life cycle
+  // they only get run when the test suite is triggered
+  //
+  // unit tests are for simple, pure functions.
+  let {describe} = t.unit;
+
+  describe(balancesByGateway, context => {
+    context("unfunded account summary", it => {
+      let summary = {isUnfunded: true};
+      it("returns an empty map", subject => {
+        expect(subject(summary)).to.equal({});
+      });
+    });
+  });
+
+  // component tests are used to test dumb components
+  // you specify a matcher object that is to be matched
+  // against the props supplied to the component. when
+  // running in debug mode, the developer will be notified
+  // if the component is ever run with props that would trigger
+  // a test failure.  by hooking into the debug mode, we help
+  // ensure that the test suite reflects real life situations.
+  // in addition, we can provide a report that shows how often
+  // your test cases occur in the wild.
+  describe = t.component.describe;
+
+  // matchers are used for two purposes: generating test data for explicit
+  // test runs and triggering runtime checks when in debug mode.  a matcher
+  // thus implements two functions.  `generate` is provided with a seed
+  // number that may be used the generate test data.  `validate` returns a
+  // boolean indicating whether the provided value matches the format of
+  // the generated values.
+  let {string, or, falsey} = t.match;
+  // testing plugins get registered in the `x` object
+  let {amount} = t.x.stellar;
+
+
+  describe(Asset, context => {
+    context("native asset", {
+      asset_type: "native",
+      asset_code: or(string(), falsey()),
+      balance: amount(),
+    }, it => {
+      // the argument provided to the test function
+      // is a component initialized with the props that
+      // where generated or matched by the test context.
+      it("renders the code as xlm", bl => {
+        // call lifecycle methods on the component
+        let dom = bl.render();
+
+        //TODO: some sort of nice expectation library on the dom
+      });
+    });
+
+    context("credit asset", {
+      asset_type: or("credit_alphanum4", "credit_alphanum12"),
+      asset_code: string(),
+      balance: amount(),
+    }, it => { });
+
+
+  });
 }

@@ -14,6 +14,22 @@ import logger from "./middleware/logger";
 import UI from './ui.js';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import test, {runUnits} from 'test';
+global.test = test;
+global.runUnits = runUnits;
+console.log(test);
+
+let {expect} = test;
+test.unit.describe("x", c => {
+  c("y", i => {
+    i("z", () => {
+      expect(3).to.equal(4);
+      expect(3).to.equal(3);
+      expect(3).to.equal(5);
+    })
+  })
+})
+
 injectTapEventPlugin();
 
 let createStoreWithMiddleware = applyMiddleware(thunk, wallet, logger)(createStore)
@@ -25,9 +41,8 @@ defer(() => {
 
   ReactDOM.render(
     <Provider store={store}>
-      <UI />  
-    </Provider>,	
+      <UI />
+    </Provider>,
     document.getElementById('app')
   );
 });
-

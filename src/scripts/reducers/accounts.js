@@ -31,8 +31,8 @@ function current(state = noAccount, action) {
   switch(action.type) {
     case LOAD_STATE:
       if (state) return state;
-      
-      
+
+
       let fromWallet = action.wallet.current;
       if (fromWallet in action.wallet.byAddress) {
         return fromWallet;
@@ -54,4 +54,27 @@ function loaded(state = false, action) {
   }
 }
 
-    
+
+export function tests(t) {
+  let {expect} = t;
+  let {describe} = t.reducer;
+
+  describe(loaded, context => {
+    // for reducer tests, context takes both a
+    // state matcher spec and an action matcher spec.
+
+    context({
+      state: false,
+      action: {type:LOAD_STATE},
+    }, it => {
+
+      // it specifiers in reducer tests are provided with the
+      // state, the action, and the previous state, which can
+      // each be easily expected upon.
+      it("moves state to true", (state, action, prev) => {
+        expect(state).to.be.true;
+      });
+
+    });
+  });
+}
