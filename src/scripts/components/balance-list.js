@@ -7,7 +7,7 @@ import {
   without,
   map,
 } from 'lodash';
-import {addTests} from "scripts/test";
+import {addTests} from "b:test";
 
 const style = {
 };

@@ -14,7 +14,7 @@ import logger from "./middleware/logger";
 import UI from './ui.js';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import test, * as t2 from 'scripts/test';
+import test, * as t2 from './test';
 global.test = test;
 test.fn = t2;
 

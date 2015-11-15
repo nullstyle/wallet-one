@@ -6,13 +6,16 @@
 		<script src="jspm_packages/system.js"></script>
     <script src="config.js"></script>
     <script>
-			<% if (config.bundle) { %>	
+			<% if (config.bundle) { %>
 			System.config({
 				bundles: { 'bundle': ['scripts/main.js'] }
 			});
 			<% } %>
 
       System.config({
+        paths: {
+          "b:*": "scripts/*",
+        },
         bundles: {'vendor.bundle': [
           "react",
           "react-dom",
@@ -23,8 +26,8 @@
           "lodash",
           "material-ui",
         ]}
-      }) 
-      System.import('scripts/main.js');
+      })
+      System.import('b:main.js');
     </script>
   </head>
   <body>

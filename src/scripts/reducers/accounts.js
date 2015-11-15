@@ -1,6 +1,6 @@
 import {combineReducers} from "redux";
-import {LOAD_ACCOUNT, LOAD_STATE, NEW_ACCOUNT} from "scripts/actions/index";
-import {addTests} from "scripts/test";
+import {LOAD_ACCOUNT, LOAD_STATE, NEW_ACCOUNT} from "b:actions/index";
+import {addTests} from "b:test";
 
 const noAccount = "";
 

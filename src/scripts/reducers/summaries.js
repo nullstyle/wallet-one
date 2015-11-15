@@ -1,5 +1,5 @@
 import {combineReducers} from "redux";
-import {LOAD_ACCOUNT_SUMMARY} from "scripts/actions/index";
+import {LOAD_ACCOUNT_SUMMARY} from "b:actions/index";
 
 
 const summaries = combineReducers({
@@ -23,4 +23,3 @@ function byAddress(state = {}, action) {
       return state;
   }
 }
-

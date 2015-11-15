@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, Link, IndexRoute } from 'react-router';
 
-import * as Screen from "scripts/screens.js";
+import * as Screen from "./screens.js";
 
 const style = {
 	position: 'absolute',
@@ -17,7 +17,7 @@ export default class UI extends React.Component {
       <Router>
         <Route path="/" component={Screen.Unlock} />
         <Route path="/home" component={Screen.Home}>
-          
+
         </Route>
         <Route path="/settings" component={Screen.Settings} />
       </Router>

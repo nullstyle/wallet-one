@@ -1,7 +1,7 @@
 import {diff} from "deep-diff";
 import {mapValues, pick, defer} from "lodash";
 
-import {walletChanged} from "scripts/actions/index";
+import {walletChanged} from "b:actions/index";
 
 let remote = require("remote");
 let wallet = remote.require("./wallet");
@@ -13,18 +13,18 @@ const walletMiddleware = store => next => action => {
 
   if (!currentState) return result;
   if (!currentState.accounts.loaded) return result;
-  
- 
+
+
   let currentWallet = makeWallet(currentState);
   let nextWallet = makeWallet(nextState);
 
   let changed = diff(currentWallet, nextWallet);
-  
+
   if (changed) {
     wallet.save(nextWallet);
     defer(() => store.dispatch(walletChanged()))
   }
- 
+
   return result;
 }
 

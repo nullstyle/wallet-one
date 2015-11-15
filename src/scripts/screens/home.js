@@ -1,21 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  AppBar, Tabs, Tab, FloatingActionButton, 
+  AppBar, Tabs, Tab, FloatingActionButton,
 } from 'material-ui';
 import AddIcon from "material-ui/lib/svg-icons/content/add"
 
 
-import palette from 'scripts/palette';
+import palette from 'b:palette';
 import {
   BalanceList,
   TransactionList,
   AccountMenu,
   SendForm,
   Loading,
-} from "scripts/components";
+} from "b:components";
 
-import {loadAccount, loadAccountSummary} from 'scripts/actions/index'
+import {loadAccount, loadAccountSummary} from 'b:actions/index'
 
 const style = {
   backgroundColor: palette.main,
@@ -34,7 +34,7 @@ class Home extends React.Component {
   render() {
     let {accounts, dispatch, summaries} = this.props;
     let summary = summaries.byAddress[accounts.current];
-    
+
     if (!summary) {
       dispatch(loadAccountSummary({address: accounts.current}));
       return <Loading />
@@ -57,8 +57,8 @@ class Home extends React.Component {
 
       {this.props.children}
 
-      <FloatingActionButton 
-        style={addGatewayStyle} 
+      <FloatingActionButton
+        style={addGatewayStyle}
         backgroundColor={palette.secondaryButton}>
         <AddIcon />
       </FloatingActionButton>
@@ -80,7 +80,7 @@ class Home extends React.Component {
 }
 
 function select(state) {
-  return state; 
+  return state;
 }
 
 export default connect(select)(Home);
