@@ -33,17 +33,42 @@ export function loadTests() {
 
 export function runUnits() {
   let failures = [];
+  let successes = [];
+
   eachCase(unit.cases, kase => {
     try {
       // TODO: allow promise return values;
       kase.fn(kase.subject);
+      successes.push({kase});
     } catch(error) {
       let failure = {kase, error}
       failures.push(failure);
     }
   });
 
-  return {failures};
+  return {failures,successes};
+}
+
+export function runReducers() {
+  let failures = [];
+  let successes = [];
+
+  eachCase(reducer.cases, kase => {
+    try {
+      let reducer   = kase.subject;
+      let state     = makeGenerator(kase.context.state).generate();
+      let action    = makeGenerator(kase.context.action).generate();
+      let nextState = reducer(state, action);
+
+      kase.fn(nextState, action, state);
+      successes.push({kase});
+    } catch(error) {
+      let failure = {kase, error}
+      failures.push(failure);
+    }
+  });
+
+  return {failures, successes};
 }
 
 const t = {unit, component, reducer, actionCreator, expect, match, x};
@@ -78,4 +103,9 @@ function newType()  {
     cases.push({subject, contexts});
   }
   return {cases, describe};
+}
+
+function makeGenerator(spec) {
+  let generate = seed => spec;
+  return {generate};
 }
