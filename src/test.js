@@ -1,21 +1,11 @@
 import {each} from "lodash";
-import {expect as chaiExpect} from "chai";
+import {expect} from "chai";
 
-let expectBuffer = [];
-export function expect(...args) {
-  let e = chaiExpect(...args);
-  expectBuffer.push(e);
-  return e;
-}
-function finishCase() {
-  let result = expectBuffer;
-  expectBuffer = [];
-  return result;
-}
+class Type {
+  constructor() {
+    this.cases = [];
+  }
 
-
-let units = [];
-const unit = {
   describe(desc, fn) {
     let contexts = [];
     let context = (desc, fn) => {
@@ -25,20 +15,16 @@ const unit = {
       contexts.push({desc, its});
     }
     fn(context);
-    units.push({desc, contexts});
-  },
-};
+    this.cases.push({desc, contexts});
+  }
+}
+
+const unit = new Type();
+const component = new Type();
+const reducer =  new Type();
+const actionCreator =  new Type();
 
 const none = () => {};
-const component = {
-  describe: none,
-};
-const reducer = {
-  describe: none,
-};
-const actionCreator = {
-  describe: none,
-};
 const match = {
   any: none,
   string: none,
@@ -47,26 +33,32 @@ const match = {
 
 export function runUnits() {
   let failures = [];
-  each(units, describe => {
+  eachCase(unit.cases, kase => {
+    try {
+      // TODO: allow promise return values;
+      kase.fn();
+    } catch(error) {
+      let failure = {kase, error}
+      failures.push(failure);
+    }
+  });
+
+  return {failures};
+}
+
+function eachCase(describes, runCaseFn) {
+  return each(describes, describe => {
     each(describe.contexts, context => {
       each(context.its, it => {
-        let kase = {
+        runCaseFn({
           describe: describe.desc,
           context: context.desc,
           it: it.desc,
-        };
-        try {
-          // TODO: allow promise return values;
-          it.fn();
-        } catch(error) {
-          let failure = {kase, error}
-          failures.push(failure);
-        }
+          fn: it.fn,
+        });
       });
     });
   });
-
-  return failures;
 }
 
 const t = {unit, component, reducer, actionCreator, expect, match};
