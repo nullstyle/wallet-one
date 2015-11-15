@@ -12,6 +12,7 @@ import wallet from "./middleware/wallet";
 import logger from "./middleware/logger";
 
 import UI from './ui.js';
+import DevTools from './dev-tools.js';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import test, * as t2 from './test';
@@ -23,13 +24,22 @@ injectTapEventPlugin();
 let createStoreWithMiddleware = applyMiddleware(thunk, wallet, logger)(createStore)
 var store = createStoreWithMiddleware(walletOneApp);
 
+const style = {
+  display:       'flex',
+  flexDirection: 'row-reverse',
+  height:        "100%",
+  position:      "relative",
+};
 
 defer(() => {
   store.dispatch(loadState());
 
   ReactDOM.render(
     <Provider store={store}>
-      <UI />
+      <div style={style}>
+        <DevTools />
+        <UI />
+      </div>
     </Provider>,
     document.getElementById('app')
   );

@@ -18,19 +18,20 @@ export function SplashScreen(props) {
 }
 
 const splashStyles = {
-	width: '100%',
-	height: '100%',
-	margin: '0',
-	padding: '0',
-  display: 'flex',
-  alignItems: 'center',
+	width:          '100%',
+	height:         '100%',
+	margin:         '0',
+	padding:        '0',
+  display:        'flex',
+  alignItems:     'center',
   justifyContent: 'center',
+	position:       'absolute',
 }
 
 // SendButton provides a floating action button with a dollar sign icon
 
 export function SendButton(props) {
-	return <FloatingActionButton 
+	return <FloatingActionButton
 		style={sendStyle}
 		onTouchTap={props.onClick}>
 		<SendIcon />
@@ -42,5 +43,3 @@ const sendStyle = {
 	bottom: 24,
 	right: 24,
 };
-
-

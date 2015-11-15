@@ -28,12 +28,13 @@ builder.use($.define({ config }));
 builder.use($.ignore([ "**/.*" ]));
 builder.use($.sass());
 builder.use($.inPlace({ pattern: "*.html", engine: 'ejs' }));
-  
+
 if (config.watch) {
 	builder.use($.watch({
 		livereload: true,
 		paths: {
-			"${source}/scripts/**/*": true,
+			"${source}/browser/**/*": true,
+			"${source}/app/**/*": true,
 			"${source}/styles/**/*": true,
 			"${source}/*": true,
 		}
@@ -53,4 +54,3 @@ builder.build(function(err) {
 			});
 	}
 });
-

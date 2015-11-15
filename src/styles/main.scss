@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
 
-body {
+body, #app {
 	margin: 0;
 	padding: 0;
 	position: absolute;
@@ -16,4 +16,3 @@ body {
 
 	> .msg { max-width: 50%; }
 }
-
