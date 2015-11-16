@@ -57,10 +57,9 @@ function loaded(state = false, action) {
 
 
 export function specs(s) {
-  let {expect, contracts} = s;
-  let {describe} = s.reducer;
+  let {expect, contracts, describe} = s;
 
-  describe(byAddress, context => {
+  describe.reducer(byAddress, context => {
     context({
       state: {},
       action: {
@@ -76,7 +75,7 @@ export function specs(s) {
     });
   });
 
-  describe(current, context => {
+  describe.reducer(current, context => {
     context({
       state: noAccount,
       action: {
@@ -90,7 +89,7 @@ export function specs(s) {
     })
   })
 
-  describe(loaded, context => {
+  describe.reducer(loaded, context => {
     // for reducer tests, context takes both a
     // state matcher spec and an action matcher spec.
 

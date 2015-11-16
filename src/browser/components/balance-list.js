@@ -77,16 +77,14 @@ function balancesByGateway(summary) {
 
 export function specs(s) {
 
-  let {expect} = s;
+  let {expect, describe} = s;
 
   // unit tests are just like normal mocha tests
   // and do not plug into the application life cycle
   // they only get run when the test suite is triggered
   //
   // unit tests are for simple, pure functions.
-  let {describe} = s.unit;
-
-  describe(balancesByGateway, context => {
+  describe.unit(balancesByGateway, context => {
     context("unfunded account summary", it => {
       let summary = {isUnfunded: true};
       it("returns an empty map", subject => {
@@ -114,16 +112,6 @@ export function specs(s) {
     });
   });
 
-  // component tests are used to test dumb components
-  // you specify a matcher object that is to be matched
-  // against the props supplied to the component. when
-  // running in debug mode, the developer will be notified
-  // if the component is ever run with props that would trigger
-  // a test failure.  by hooking into the debug mode, we help
-  // ensure that the test suite reflects real life situations.
-  // in addition, we can provide a report that shows how often
-  // your test cases occur in the wild.
-  describe = s.component.describe;
 
   // matchers are used for two purposes: generating test data for explicit
   // test runs and triggering runtime checks when in debug mode.  a matcher
@@ -136,7 +124,16 @@ export function specs(s) {
   let {amount} = s.x.stellar;
 
 
-  describe(Asset, context => {
+  // component tests are used to test dumb components
+  // you specify a matcher object that is to be matched
+  // against the props supplied to the component. when
+  // running in debug mode, the developer will be notified
+  // if the component is ever run with props that would trigger
+  // a test failure.  by hooking into the debug mode, we help
+  // ensure that the test suite reflects real life situations.
+  // in addition, we can provide a report that shows how often
+  // your test cases occur in the wild.
+  describe.component(Asset, context => {
     context("native asset", {
       asset_type: "native",
       asset_code: or(string(), falsey()),

@@ -1,19 +1,23 @@
 import {each, reduce, any, isFunction, filter, find} from "lodash";
 import {expect} from "chai";
+
+import actions from './spec/actions';
+import contracts from './spec/contracts';
 import generate from './spec/generators';
 import match from './spec/matchers';
-import contracts from './spec/contracts';
 
 var specFns = [];
 var subjects = [];
 var cases = [];
 
 const none = () => {};
-const unit = newType('Unit', runUnit);
-const component = newType('Component', none);
-const reducer = newType('Reducer', runReducer);
-const actionCreator = newType('Action Creator', none);
 
+const describe = {
+  actionCreator: newType('Action Creator', none),
+  component:     newType('Component', none),
+  reducer:       newType('Reducer', runReducer),
+  unit:          newType('Unit', runUnit),
+}
 
 const x = {
   stellar: {
@@ -70,8 +74,7 @@ export function runReducer(kase) {
 
 
 const spec = {
-  actionCreator, cases, component, contracts, expect, generate, match, reducer,
-  subjects, unit, x,
+  cases, contracts, describe, expect, generate, match, subjects, x,
 };
 export default spec;
 
@@ -88,7 +91,7 @@ function newType(category, caseFn)  {
     fn(context);
     subjects.push({category, desc, contexts, caseFn});
   }
-  return {describe};
+  return describe;
 }
 
 function makeCases(toRun, fn) {

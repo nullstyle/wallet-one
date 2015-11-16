@@ -89,7 +89,7 @@ export function walletChanged(newWallet) {
 }
 
 export function specs(s) {
-  let {describe} = s.actionCreator;
+  let {describe} = s;
   let {keypair} = s.x.match;
 
   // Action creator tests ensure that our actions
@@ -108,7 +108,7 @@ export function specs(s) {
   // probability of running actionCreator tests in debug
   // mode.  The testing middleware actually runs the it
   // blocks and can accept a weighting function.
-  describe(ac, context => {
+  describe.actionCreator(ac, context => {
     context({
       keypair: keypair.full(),
     }, it => {
