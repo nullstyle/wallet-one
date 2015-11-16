@@ -71,7 +71,6 @@ export function specs(s) {
       }
     }, it => {
       it("replaces the state", (state, action) => {
-        expect(3).to.equal(4);
         expect(state).to.equal(action.wallet.byAddress);
       });
     });
