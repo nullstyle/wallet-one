@@ -57,7 +57,7 @@ function loaded(state = false, action) {
 
 
 export function specs(s) {
-  let {expect} = s;
+  let {expect, contracts} = s;
   let {describe} = s.reducer;
 
   describe(byAddress, context => {
@@ -75,6 +75,20 @@ export function specs(s) {
       });
     });
   });
+
+  describe(current, context => {
+    context({
+      state: noAccount,
+      action: {
+        type: LOAD_ACCOUNT,
+        address: "123",
+      }
+    }, it => {
+      it("replaces the state", (state, action) =>  {
+        expect(state).to.equal(action.address);
+      })
+    })
+  })
 
   describe(loaded, context => {
     // for reducer tests, context takes both a
