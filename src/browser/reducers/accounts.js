@@ -1,6 +1,6 @@
 import {combineReducers} from "redux";
 import {LOAD_ACCOUNT, LOAD_STATE, NEW_ACCOUNT} from "b:actions/index";
-import {addTests} from "b:test";
+import {addSpecs} from "b:spec";
 
 const noAccount = "";
 
@@ -56,9 +56,9 @@ function loaded(state = false, action) {
 }
 
 
-export function tests(t) {
-  let {expect} = t;
-  let {describe} = t.reducer;
+export function specs(s) {
+  let {expect} = s;
+  let {describe} = s.reducer;
 
   describe(byAddress, context => {
     context({
@@ -71,6 +71,7 @@ export function tests(t) {
       }
     }, it => {
       it("replaces the state", (state, action) => {
+        expect(3).to.equal(4);
         expect(state).to.equal(action.wallet.byAddress);
       });
     });
@@ -95,4 +96,4 @@ export function tests(t) {
     });
   });
 }
-addTests(tests);
+addSpecs(specs);

@@ -2,10 +2,11 @@ import { combineReducers } from 'redux';
 
 import accounts from "./accounts";
 import summaries from "./summaries";
+import spec from "b:spec/reducer";
 
 // const initialState = {
 
-  
+
 //   newPayment: {
 //     rawDestination: null,
 //     resolvedDestination: {
@@ -31,8 +32,7 @@ import summaries from "./summaries";
 const walletOneApp = combineReducers({
   accounts,
   summaries,
+  spec,
 })
 
 export default walletOneApp;
-
-

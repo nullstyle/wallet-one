@@ -15,9 +15,9 @@ import UI from './ui.js';
 import DevTools from './dev-tools.js';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import test, * as t2 from './test';
-global.test = test;
-test.fn = t2;
+import spec, * as s2 from './spec';
+global.spec = spec;
+spec.fn = s2;
 
 injectTapEventPlugin();
 

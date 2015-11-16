@@ -1,36 +1,54 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
 	Paper, List, ListItem,
 } from "material-ui";
 
 import ActionDone from "material-ui/lib/svg-icons/action/done";
 
+import {SpecMenu} from "./spec/components";
+import {specStatusChanged} from "./spec/actions";
+import spec, {loadSpecs, runSpecs} from "./spec";
+
 const style = {
 	flex:          1,
-	maxWidth:      400,
+	maxWidth:      300,
 	height:        "100%",
 	display:       "flex",
 	flexDirection: "column",
 	zIndex:        10,
-	padding:       5,
 };
 
-export default class DevTools extends React.Component {
+class DevTools extends React.Component {
+	componentWillMount() {
+		loadSpecs();
+		let cases = spec.cases;
+		let action = specStatusChanged(cases);
+		this.props.dispatch(action);
+	}
+
   render() {
     return <Paper id="devtools" zDepth={3} style={style}>
-		<List subheader="Developer Tools">
-		  <ListItem
-		    primaryText="Run Tests"
-		    leftIcon={<ActionDone />}
-		    initiallyOpen={false}
-		    nestedItems={[
-		      <ListItem primaryText="Actions Only" leftIcon={<ActionDone />} />,
-		      <ListItem primaryText="Components Only" leftIcon={<ActionDone />} />,
-		      <ListItem primaryText="Reducers Only" leftIcon={<ActionDone />} />,
-		      <ListItem primaryText="Units Only" leftIcon={<ActionDone />} />,
-		    ]}
-		  />
-		</List>
+			<List subheader="Developer Tools">
+				<SpecMenu
+					cases={this.props.cases}
+					onTouchTap={c => this.handleTap(c)}
+					/>
+			</List>
 		</Paper>;
   }
+
+	handleTap(category) {
+		runSpecs(category);
+		let cases = spec.cases;
+		let action = specStatusChanged(cases);
+		this.props.dispatch(action);
+	}
 }
+
+function select(state) {
+	let {cases} = state.spec;
+	return {cases};
+}
+
+export default connect(select)(DevTools);

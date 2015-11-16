@@ -88,9 +88,9 @@ export function walletChanged(newWallet) {
   };
 }
 
-export function tests(t) {
-  let {describe} = t.actionCreator;
-  let {keypair} = t.x.match;
+export function specs(s) {
+  let {describe} = s.actionCreator;
+  let {keypair} = s.x.match;
 
   // Action creator tests ensure that our actions
   // are always in specified states.  when run by

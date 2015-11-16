@@ -7,7 +7,7 @@ import {
   without,
   map,
 } from 'lodash';
-import {addTests} from "b:test";
+import {addSpecs} from "b:spec";
 
 const style = {
 };
@@ -75,16 +75,16 @@ function balancesByGateway(summary) {
   return {byGateway, sorted};
 }
 
-export function tests(t) {
+export function specs(s) {
 
-  let {expect} = t;
+  let {expect} = s;
 
   // unit tests are just like normal mocha tests
   // and do not plug into the application life cycle
   // they only get run when the test suite is triggered
   //
   // unit tests are for simple, pure functions.
-  let {describe} = t.unit;
+  let {describe} = s.unit;
 
   describe(balancesByGateway, context => {
     context("unfunded account summary", it => {
@@ -123,7 +123,7 @@ export function tests(t) {
   // ensure that the test suite reflects real life situations.
   // in addition, we can provide a report that shows how often
   // your test cases occur in the wild.
-  describe = t.component.describe;
+  describe = s.component.describe;
 
   // matchers are used for two purposes: generating test data for explicit
   // test runs and triggering runtime checks when in debug mode.  a matcher
@@ -131,9 +131,9 @@ export function tests(t) {
   // number that may be used the generate test data.  `validate` returns a
   // boolean indicating whether the provided value matches the format of
   // the generated values.
-  let {string, or, falsey} = t.match;
+  let {string, or, falsey} = s.match;
   // testing plugins get registered in the `x` object
-  let {amount} = t.x.stellar;
+  let {amount} = s.x.stellar;
 
 
   describe(Asset, context => {
@@ -162,4 +162,4 @@ export function tests(t) {
 
   });
 }
-addTests(tests);
+addSpecs(specs);

@@ -1,5 +1,5 @@
 import {
-  isArray, isFunction, isObject,
+  isArray, isFunction, isObject, isString,
   map, mapValues,
   any,
 } from "lodash";
@@ -18,11 +18,15 @@ export default function match(spec, val) {
   }
 }
 
-export function or(...args) {
+match.string = () => {
+  //TODO: add some options for length and such
+  return isString
+}
+
+match.or = (...args) => {
   return (val) => {
     return any(args, v => match(v, val))
   }
 }
 
-let falsey = or(null, false, undefined);
-export {falsey};
+match.falsey = match.or(null, false, undefined);
