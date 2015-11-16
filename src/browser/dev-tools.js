@@ -10,9 +10,11 @@ import {SpecMenu} from "./spec/components";
 import {specStatusChanged} from "./spec/actions";
 import spec, {loadSpecs, runSpecs} from "./spec";
 
-const style = {
+
+const devToolStyles = {
 	flex:          1,
 	maxWidth:      300,
+	minWidth:      200,
 	height:        "100%",
 	display:       "flex",
 	flexDirection: "column",
@@ -28,6 +30,8 @@ class DevTools extends React.Component {
 	}
 
   render() {
+		let display = this.props.isVisible ? 'flex' : 'none';
+		let style = Object.assign({}, devToolStyles, {display});
     return <Paper id="devtools" zDepth={3} style={style}>
 			<List subheader="Developer Tools">
 				<SpecMenu

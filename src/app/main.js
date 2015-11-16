@@ -1,5 +1,6 @@
-var app = require('app');  // Module to control application life.
-var BrowserWindow = require('browser-window');  // Module to create native browser window.
+const app = require('app');
+const globalShortcut = require('global-shortcut');
+const BrowserWindow = require("browser-window");
 
 // Report crashes to our server.
 require('crash-reporter').start();
@@ -37,12 +38,6 @@ app.on('ready', function() {
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 450, height: 600, 'title-bar-style': 'hidden'});
 
-  // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/../index.html');
-
-  // Open the DevTools.
-  mainWindow.openDevTools();
-
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows
@@ -50,4 +45,14 @@ app.on('ready', function() {
     // when you should delete the corresponding element.
     mainWindow = null;
   });
+
+  var registered = globalShortcut.register('`', function() {
+    mainWindow.webContents.executeJavaScript("toggleDevTools();", true);
+  });
+  if (!registered) {
+    console.log('registration failed');
+  }
+
+  mainWindow.loadUrl('file://' + __dirname + '/../index.html');
+  mainWindow.openDevTools();
 });

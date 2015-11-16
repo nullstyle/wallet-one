@@ -13,12 +13,12 @@ import {reduce, any, map} from 'lodash';
 
 const SpecMenu = (props) => {
   let {cases, onTouchTap} = props;
-	console.log(cases);
   let categories = buildCategories(cases);
   let icon = statusIcon(cases);
   let color = statusColor(cases);
   let nested = map(categories, (cases, name) => {
     return <SpecCategory
+      key={name}
       name={name}
       cases={cases}
       onTouchTap={() => onTouchTap(name)} />

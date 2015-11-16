@@ -15,9 +15,6 @@ import UI from './ui.js';
 import DevTools from './dev-tools.js';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import spec, * as s2 from './spec';
-global.spec = spec;
-spec.fn = s2;
 
 injectTapEventPlugin();
 
@@ -31,16 +28,25 @@ const style = {
   position:      "relative",
 };
 
-defer(() => {
-  store.dispatch(loadState());
+let devToolsVisible = false;
+global.toggleDevTools = () => {
+  devToolsVisible = !devToolsVisible;
+  render();
+}
 
+function render() {
   ReactDOM.render(
     <Provider store={store}>
       <div style={style}>
-        <DevTools />
+        <DevTools isVisible={devToolsVisible} />
         <UI />
       </div>
     </Provider>,
     document.getElementById('app')
   );
+}
+
+defer(() => {
+  store.dispatch(loadState());
+  render();
 });
