@@ -6,7 +6,7 @@ import {
 
 import ActionDone from "material-ui/lib/svg-icons/action/done";
 
-import {SpecMenu} from "./spec/components";
+import {SpecMenu, SpecReport} from "./spec/components";
 import {specStatusChanged} from "./spec/actions";
 import spec, {loadSpecs, runSpecs} from "./spec";
 
@@ -32,12 +32,15 @@ class DevTools extends React.Component {
   render() {
 		let display = this.props.isVisible ? 'flex' : 'none';
 		let style = Object.assign({}, devToolStyles, {display});
+		let {cases} = this.props;
+
     return <Paper id="devtools" zDepth={3} style={style}>
 			<List subheader="Developer Tools">
 				<SpecMenu
-					cases={this.props.cases}
+					cases={cases}
 					onTouchTap={c => this.handleTap(c)}
 					/>
+				<SpecReport cases={cases} />
 			</List>
 		</Paper>;
   }
