@@ -3,6 +3,15 @@ import {extend} from 'lodash'
 import {FloatingActionButton} from 'material-ui';
 import SendIcon from "material-ui/lib/svg-icons/editor/attach-money";
 
+import {age} from "b:time";
+
+export function Age(props) {
+	let {of} = props
+	return <div style={{whiteSpace: "nowrap"}}>
+		{age(of)}
+	</div>
+}
+
 // Loading is a loading screen
 export function Loading(props) {
 	return <div>Loading...</div>

@@ -21,6 +21,7 @@ System.config({
     "keymaster": "npm:keymaster@1.6.2",
     "lodash": "npm:lodash@3.10.1",
     "material-ui": "npm:material-ui@0.13.1",
+    "moment": "npm:moment@2.10.6",
     "react": "npm:react@0.14.2",
     "react-dom": "npm:react-dom@0.14.2",
     "react-redux": "npm:react-redux@4.0.0",
@@ -164,6 +165,9 @@ System.config({
       "react-addons-update": "npm:react-addons-update@0.14.2",
       "react-dom": "npm:react-dom@0.14.2",
       "react-tap-event-plugin": "npm:react-tap-event-plugin@0.2.1"
+    },
+    "npm:moment@2.10.6": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:path-browserify@0.0.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"
