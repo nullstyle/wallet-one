@@ -8,11 +8,12 @@ import AddIcon from "material-ui/lib/svg-icons/content/add"
 
 import palette from 'b:palette';
 import {
-  BalanceList,
-  TransactionList,
+  AccountName,
   AccountMenu,
-  SendForm,
+  BalancesTab,
+  HistoryTab,
   Loading,
+  SendForm,
 } from "b:components";
 
 import {loadAccount, loadAccountSummary} from 'b:actions/index'
@@ -47,12 +48,8 @@ class Home extends React.Component {
         onLeftIconButtonTouchTap={() => this.handleNavOpen()} />
 
       <Tabs tabItemContainerStyle={style}>
-        <Tab label="Balances">
-          <BalanceList summary={summary} />
-        </Tab>
-        <Tab label="Transactions">
-          <TransactionList />
-        </Tab>
+        <Tab label="Balances"><BalancesTab summary={summary} /></Tab>
+        <Tab label="History"><HistoryTab history={history} /></Tab>
       </Tabs>
 
       {this.props.children}

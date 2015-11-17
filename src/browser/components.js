@@ -1,8 +1,8 @@
-import BalanceList from './components/balance-list';
-import TransactionList from './components/transaction-list';
+import BalancesTab from './components/balances-tab';
+import HistoryTab from './components/history-tab';
 import AccountMenu from './components/account-menu';
 import SendForm from './components/send-form';
 
-export { BalanceList, TransactionList, AccountMenu, SendForm };
+export { BalancesTab, HistoryTab, AccountMenu, SendForm };
 
 export * from './components/widgets';

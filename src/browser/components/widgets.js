@@ -8,8 +8,23 @@ export function Loading(props) {
 	return <div>Loading...</div>
 }
 
-// SplashScreen filles it's parent
 
+// SendButton provides a floating action button with a dollar sign icon
+export function SendButton(props) {
+	return <FloatingActionButton
+		style={sendStyle}
+		onTouchTap={props.onClick}>
+		<SendIcon />
+	</FloatingActionButton>
+}
+
+const sendStyle = {
+	position: 'absolute',
+	bottom: 24,
+	right: 24,
+};
+
+// SplashScreen filles it's parent
 export function SplashScreen(props) {
 	let styles = extend(splashStyles, {
 		background: props.color,
@@ -27,19 +42,3 @@ const splashStyles = {
   justifyContent: 'center',
 	position:       'absolute',
 }
-
-// SendButton provides a floating action button with a dollar sign icon
-
-export function SendButton(props) {
-	return <FloatingActionButton
-		style={sendStyle}
-		onTouchTap={props.onClick}>
-		<SendIcon />
-	</FloatingActionButton>
-}
-
-const sendStyle = {
-	position: 'absolute',
-	bottom: 24,
-	right: 24,
-};

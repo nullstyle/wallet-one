@@ -1,5 +1,5 @@
 import React from 'react';
-import {List, ListItem, ListDivider} from 'material-ui';
+import {List, ListItem, ListDivider, Tab} from 'material-ui';
 import {
   reduce,
   sortBy,
@@ -8,6 +8,7 @@ import {
   map,
 } from 'lodash';
 import {addSpecs} from "b:spec";
+import {AccountName} from "./widgets";
 
 const style = {
 };
@@ -20,7 +21,7 @@ const balanceAmountStyle = {
 
 const nativeSym = "0";
 
-export default class BalanceList extends React.Component {
+export default class BalancesTab extends React.Component {
   render() {
     if (this.props.summary.isUnfunded) return (<div />);
 
@@ -30,7 +31,9 @@ export default class BalanceList extends React.Component {
       return <Gateway key={id} gateway={gateway} assets={assets} />;
     });
 
-    return <div>{lines}</div>;
+    return <div>
+      {lines}
+    </div>;
   }
 }
 
