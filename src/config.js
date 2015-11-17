@@ -18,6 +18,7 @@ System.config({
     "chai": "npm:chai@3.4.1",
     "core-js": "npm:core-js@1.2.6",
     "deep-diff": "npm:deep-diff@0.3.3",
+    "keymaster": "npm:keymaster@1.6.2",
     "lodash": "npm:lodash@3.10.1",
     "material-ui": "npm:material-ui@0.13.1",
     "react": "npm:react@0.14.2",

@@ -46,13 +46,6 @@ app.on('ready', function() {
     mainWindow = null;
   });
 
-  var registered = globalShortcut.register('`', function() {
-    mainWindow.webContents.executeJavaScript("toggleDevTools();", true);
-  });
-  if (!registered) {
-    console.log('registration failed');
-  }
-
   mainWindow.loadUrl('file://' + __dirname + '/../index.html');
   mainWindow.openDevTools();
 });

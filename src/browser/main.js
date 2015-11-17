@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
 import { defer } from 'lodash';
+import key from 'keymaster';
 
 import walletOneApp from './reducers/index';
 import {loadState} from './actions/index';
@@ -29,10 +30,11 @@ const style = {
 };
 
 let devToolsVisible = false;
-global.toggleDevTools = () => {
+let toggleDevTools = () => {
   devToolsVisible = !devToolsVisible;
   render();
 }
+key('`', toggleDevTools);
 
 function render() {
   ReactDOM.render(
